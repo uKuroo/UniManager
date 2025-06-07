@@ -3,6 +3,10 @@
 /home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/domain/entities/participants/Participant.java
 /home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/domain/entities/participants/Student.java
 /home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/domain/repositoryInterface/events/IEventRepository.java
+/home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/domain/repositoryInterface/participants/IParticipantRepository.java
+/home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/infra/repository/FileEventRepository.java
+/home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/infra/repository/FileParticipantRepository.java
 /home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/useCase/managers/implementation/EventManager.java
 /home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/useCase/managers/implementation/ParticipantManager.java
 /home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/useCase/managers/interfaces/IManager.java
+/home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/view/cli/HomeMenu.java
