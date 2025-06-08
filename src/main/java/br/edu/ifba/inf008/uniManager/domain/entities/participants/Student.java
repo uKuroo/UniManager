@@ -5,10 +5,24 @@
 
 package br.edu.ifba.inf008.uniManager.domain.entities.participants;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author gabriel
  */
 public class Student extends Participant{
-    
+    private final String registration;
+
+    public Student(String name, String cpf, String email, String address, String phone, LocalDate birthDate, String registration){
+        super(name, cpf, email, address, phone, birthDate);
+        this.registration = registration;
+    }
+
+    public String getRegistration(){ return this.registration; }
+
+    @Override
+    public String getType(){
+        return "Student";
+    }
 }

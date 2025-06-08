@@ -6,7 +6,7 @@
 package br.edu.ifba.inf008.uniManager.domain.entities.events;
 
 import java.time.LocalDate;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import br.edu.ifba.inf008.uniManager.domain.entities.participants.Participant;
 
@@ -21,7 +21,7 @@ public abstract class Event {
     protected LocalDate date;
     protected String local;
     protected int capacity;
-    protected HashMap<String, Participant> participants;
+    protected LinkedHashMap<String, Participant> participants;
 
 
     public Event(String title, String id, String description, LocalDate date, String local, int capacity){
@@ -31,7 +31,7 @@ public abstract class Event {
         this.date = date;
         this.local = local;
         this.capacity = capacity;
-        this.participants = new HashMap<>();
+        this.participants = new LinkedHashMap<>();
     }
 
     //#region Gets
@@ -41,7 +41,7 @@ public abstract class Event {
     public LocalDate getDate(){ return this.date; }
     public String getLocal(){ return this.local; }
     public int getCapacity(){ return this.capacity; }
-    public HashMap<String, Participant> getParticipants(){ return this.participants; }
+    public LinkedHashMap<String, Participant> getParticipants(){ return this.participants; }
     //#endregion
 
     //#region Sets
@@ -50,6 +50,8 @@ public abstract class Event {
     public void setDate(LocalDate date){ this.date = date; }
     public void setLocal(String local){ this.local = local; }
     public void setCapacity(int capacity){ this.capacity = capacity; }
-    public void setParticipants(HashMap<String, Participant> participants){ this.participants = participants; }
+    public void setParticipants(LinkedHashMap<String, Participant> participants){ this.participants = participants; }
     //#endregion
+
+    public abstract String getType();
 }

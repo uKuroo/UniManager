@@ -5,15 +5,50 @@
 
 package br.edu.ifba.inf008.uniManager.domain.entities.participants;
 
+import java.time.LocalDate;
+import java.util.LinkedHashMap;
+
+import br.edu.ifba.inf008.uniManager.domain.entities.events.Event;
+
 /**
  *
  * @author gabriel
  */
 public abstract class Participant {
-    protected String cpf;
     protected String name;
+    protected String cpf;
+    protected String email;
+    protected String address;
+    protected String phone;
+    protected LocalDate birthDate;
+    protected LinkedHashMap<String, Event> eventsIncluded;
 
-    public String getCpf(){
-        return this.cpf;
+    public Participant(String name, String cpf, String email, String address, String phone, LocalDate birthDate){
+        this.name = name;
+        this.cpf = cpf;
+        this.email = email;
+        this.address = address;
+        this.phone = phone;
+        this.birthDate = birthDate;
+        eventsIncluded = new LinkedHashMap<>();
     }
+
+    //#region Gets
+    public String getName(){ return this.name; }
+    public String getCpf(){ return this.cpf; }
+    public String getEmail(){ return this.email; }
+    public String getphone(){ return this.phone; }
+    public LocalDate getBirthDate(){ return this.birthDate; }
+    public LinkedHashMap<String, Event> getEventsIncluded(){ return this.eventsIncluded; }
+    //#endregion 
+    
+    //#region Sets
+    public void setName(String name){ this.name = name; }
+    public void setCpf(String cpf){ this.cpf = cpf; }
+    public void setEmail(String email){ this.email = email; }
+    public void setphone(String phone){ this.phone = phone; }
+    public void setBirthDate(LocalDate birthDate){ this.birthDate = birthDate; }
+    //#endregion
+
+    public abstract String getType();
 }

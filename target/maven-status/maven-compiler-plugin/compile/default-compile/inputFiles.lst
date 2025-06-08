@@ -1,5 +1,9 @@
 /home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/App.java
+/home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/domain/entities/events/AcademicFair.java
 /home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/domain/entities/events/Event.java
+/home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/domain/entities/events/Lecture.java
+/home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/domain/entities/events/ShortCourse.java
+/home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/domain/entities/events/Workshop.java
 /home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/domain/entities/participants/Participant.java
 /home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/domain/entities/participants/Student.java
 /home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/domain/repositoryInterface/events/IEventRepository.java
@@ -9,4 +13,5 @@
 /home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/useCase/managers/implementation/EventManager.java
 /home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/useCase/managers/implementation/ParticipantManager.java
 /home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/useCase/managers/interfaces/IManager.java
+/home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/utils/MenuUtil.java
 /home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/view/cli/HomeMenu.java
