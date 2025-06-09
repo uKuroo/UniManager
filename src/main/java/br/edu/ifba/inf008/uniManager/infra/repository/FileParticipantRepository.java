@@ -5,30 +5,30 @@ import java.util.LinkedHashMap;
 import br.edu.ifba.inf008.uniManager.domain.entities.participants.Participant;
 import br.edu.ifba.inf008.uniManager.domain.repositoryInterface.participants.IParticipantRepository;
 
-public class FileParticipantRepository implements IParticipantRepository{
+public class FileParticipantRepository implements IRepository{
     private final String filename = "participants.dat";
     
     @Override
-    public void salvar(Participant participant) {
-        // LinkedHashMap<String, Event> events = listar(); // carregar existentes
-        // events.put(event.getId(), event);
-        // try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
-        //     oos.writeObject(events);
-        // } catch (IOException e) {
-        //     throw new RuntimeException("Erro ao salvar eventos", e);
-        // }
+    public void save(Participant participant) {
+        LinkedHashMap<String, Event> events = getAll(); // carregar existentes
+        events.put(event.getId(), event);
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
+            oos.writeObject(events);
+        } catch (IOException e) {
+            throw new RuntimeException("Erro ao salvar eventos", e);
+        }
     }
 
     @Override
-    public LinkedHashMap<String, Participant> listar() {
-        // File file = new File(filename);
-        // if (!file.exists()) return new ArrayList<>();
+    public LinkedHashMap<String, Participant> getAll() {
+        File file = new File(filename);
+        if (!file.exists()) return new ArrayList<>();
 
-        // try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-        //     return (List<Event>) ois.readObject();
-        // } catch (IOException | ClassNotFoundException e) {
-        //     throw new RuntimeException("Erro ao ler events", e);
-        // }
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+            return (List<Event>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException("Erro ao ler events", e);
+        }
 
         return new LinkedHashMap<String, Participant>();
     }

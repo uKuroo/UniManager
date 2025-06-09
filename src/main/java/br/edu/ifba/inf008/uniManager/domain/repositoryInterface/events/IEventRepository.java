@@ -6,5 +6,6 @@ import br.edu.ifba.inf008.uniManager.domain.entities.events.Event;
 
 public interface IEventRepository {
     void salvar(Event event);
-    LinkedHashMap<String, Event> listar();
+    Event findById(String id);
+    LinkedHashMap<String, Event> getAll();
 }

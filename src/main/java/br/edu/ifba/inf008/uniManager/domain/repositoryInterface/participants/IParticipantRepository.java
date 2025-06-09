@@ -6,5 +6,6 @@ import br.edu.ifba.inf008.uniManager.domain.entities.participants.Participant;
 
 public interface IParticipantRepository {
     void salvar(Participant event);
-    LinkedHashMap<String, Participant> listar();
+    Participant findByCpf(String cpf);
+    LinkedHashMap<String, Participant> getAll();
 }

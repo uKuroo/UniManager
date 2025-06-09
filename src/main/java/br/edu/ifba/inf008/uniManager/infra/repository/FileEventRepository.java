@@ -17,26 +17,26 @@ public class FileEventRepository implements IEventRepository{
     private final String filename = "events.dat";
     
     @Override
-    public void salvar(Event event) {
-        // LinkedHashMap<String, Event> events = listar(); // carregar existentes
-        // events.put(event.getId(), event);
-        // try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
-        //     oos.writeObject(events);
-        // } catch (IOException e) {
-        //     throw new RuntimeException("Erro ao salvar eventos", e);
-        // }
+    public void save(Event event) {
+        LinkedHashMap<String, Event> events = getAll(); // carregar existentes
+        events.put(event.getId(), event);
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
+            oos.writeObject(events);
+        } catch (IOException e) {
+            throw new RuntimeException("Erro ao salvar eventos", e);
+        }
     }
 
     @Override
-    public LinkedHashMap<String, Event> listar() {
-        // File file = new File(filename);
-        // if (!file.exists()) return new ArrayList<>();
+    public LinkedHashMap<String, Event> getAll() {
+        File file = new File(filename);
+        if (!file.exists()) return new ArrayList<>();
 
-        // try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-        //     return (List<Event>) ois.readObject();
-        // } catch (IOException | ClassNotFoundException e) {
-        //     throw new RuntimeException("Erro ao ler events", e);
-        // }
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+            return (List<Event>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException("Erro ao ler events", e);
+        }
 
         return new LinkedHashMap<String, Event>();
     }
