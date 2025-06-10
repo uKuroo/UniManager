@@ -13,5 +13,7 @@
 /home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/useCase/managers/implementation/EventManager.java
 /home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/useCase/managers/implementation/ParticipantManager.java
 /home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/useCase/managers/interfaces/IManager.java
+/home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/utils/BasicITextTest.java
 /home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/utils/MenuUtil.java
 /home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/view/cli/HomeMenu.java
+/home/gabriel/workspace/uniManager/src/main/java/br/edu/ifba/inf008/uniManager/view/cli/IMenu.java

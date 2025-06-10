@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import br.edu.ifba.inf008.uniManager.domain.entities.events.AcademicFair;
 import br.edu.ifba.inf008.uniManager.domain.entities.events.Event;
 import br.edu.ifba.inf008.uniManager.domain.repositoryInterface.events.IEventRepository;
 
@@ -30,14 +31,18 @@ public class FileEventRepository implements IEventRepository{
     @Override
     public LinkedHashMap<String, Event> getAll() {
         File file = new File(filename);
-        if (!file.exists()) return new ArrayList<>();
+        if (!file.exists()) return new LinkedHashMap<String, Event>();
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-            return (List<Event>) ois.readObject();
+            return (LinkedHashMap<String, Event>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException("Erro ao ler events", e);
         }
+    }
 
-        return new LinkedHashMap<String, Event>();
+    @Override
+    public Event findById(String eventId){
+        AcademicFair e = new AcademicFair(eventId, eventId, eventId, null, eventId, 0, 0, null);
+        return e;
     }
 }
