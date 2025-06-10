@@ -1,4 +1,4 @@
-package br.edu.ifba.inf008.uniManager.domain.repositoryInterface.participants;
+package br.edu.ifba.inf008.uniManager.domain.ports.repository;
 
 import java.util.LinkedHashMap;
 

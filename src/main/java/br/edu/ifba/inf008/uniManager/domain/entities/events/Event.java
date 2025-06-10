@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.LinkedHashMap;
 
 import br.edu.ifba.inf008.uniManager.domain.entities.participants.Participant;
+import br.edu.ifba.inf008.uniManager.utils.Exceptions.BadRequestException;
 
 /**
  *
@@ -22,7 +23,7 @@ public abstract class Event {
     protected String local;
     protected int capacity;
     protected LinkedHashMap<String, Participant> participants;
-
+    protected String[] allowedTypesOfParticipants;
 
     public Event(String title, String id, String description, LocalDate date, String local, int capacity){
         this.title = title;
@@ -54,4 +55,14 @@ public abstract class Event {
     //#endregion
 
     public abstract String getType();
+
+    public void subscribeParticipant(Participant participant) throws BadRequestException {
+        if(participants.size() >= capacity) 
+            throw new BadRequestException("It was not possible to register because the event is full");
+            
+        if(participants.get(participant.getCpf()) != null) 
+            throw new BadRequestException("It was not possible to register because the" + participant.getClass().getSimpleName() + "is already participating");
+
+        participants.put(participant.getCpf(), participant);
+    }
 }

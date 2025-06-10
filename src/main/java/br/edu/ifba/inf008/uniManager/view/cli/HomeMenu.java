@@ -1,9 +1,10 @@
 package br.edu.ifba.inf008.uniManager.view.cli;
 
+import java.util.Scanner;
+
 import br.edu.ifba.inf008.uniManager.useCase.managers.implementation.EventManager;
 import br.edu.ifba.inf008.uniManager.useCase.managers.implementation.ParticipantManager;
-
-import java.util.Scanner;
+import br.edu.ifba.inf008.uniManager.utils.MenuUtil;
 
 public class HomeMenu implements IMenu {
     private final EventManager eventManager;
@@ -30,6 +31,16 @@ public class HomeMenu implements IMenu {
         System.out.println("|0. Exit                                    |");
         System.out.println("|===========================================|");
         
-        
+        int choice;
+        do { 
+            choice = scanner.nextInt();
+            switch (choice) {
+                case 1: 
+                    System.out.println(MenuUtil.clearTerminal());
+                    break;
+                default:
+                    continue;
+            }
+        } while (choice != 0);
     }
 }
