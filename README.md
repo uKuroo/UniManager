@@ -51,9 +51,9 @@ files/
 
 ### ⚙️ Clonar o projeto
 
-git clone https://github.com/uKuroo/uniManager.git
-cd uniManager
+- git clone https://github.com/uKuroo/uniManager.git
+- cd uniManager
 
 ### ✅ Run with
 
-mvn clean package && mvn exec:java
+- mvn clean package && mvn exec:java
