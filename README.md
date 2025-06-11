@@ -15,7 +15,31 @@ Academic event management system with support for multiple types of participants
 
 ### Folder Structure
 
-<pre lang="markdown"> ### 📁 Folder Structure ```plaintext src/ └── main/ └── java/ └── br/ └── edu/ └── ifba/ └── inf008/ └── uniManager/ ├── domain/ │ ├── entities/ │ └── ports/ ├── infra/ │ ├── repository/ │ └── exports/ ├── useCase/ ├── utils/ ├── view/ │ └── cli/ └── App.java files/ ├── binaries/ # Arquivos .dat (eventos e participantes) └── reports/ # Certificados exportados em PDF ``` </pre>
+```plaintext
+src/
+└── main/
+    └── java/
+        └── br/
+            └── edu/
+                └── ifba/
+                    └── inf008/
+                        └── uniManager/
+                            ├── domain/
+                            │   ├── entities/
+                            │   └── ports/
+                            ├── infra/
+                            │   ├── repository/
+                            │   └── exports/
+                            ├── useCase/
+                            ├── utils/
+                            ├── view/
+                            │   └── cli/
+                            └── App.java
+
+files/
+├── binaries/    # Arquivos .dat (eventos e participantes)
+└── reports/     # Certificados exportados em PDF
+```
 
 ## 🚀 How to Run the Project
 
