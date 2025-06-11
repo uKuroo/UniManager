@@ -6,9 +6,7 @@
 package br.edu.ifba.inf008.uniManager.domain.entities.participants;
 
 import java.time.LocalDate;
-import java.util.LinkedHashMap;
-
-import br.edu.ifba.inf008.uniManager.domain.entities.events.Event;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,7 +19,7 @@ public abstract class Participant {
     protected String address;
     protected String phone;
     protected LocalDate birthDate;
-    protected LinkedHashMap<String, Event> eventsIncluded;
+    protected ArrayList<String> eventsIncluded;
 
     public Participant(String name, String cpf, String email, String address, String phone, LocalDate birthDate){
         this.name = name;
@@ -30,7 +28,7 @@ public abstract class Participant {
         this.address = address;
         this.phone = phone;
         this.birthDate = birthDate;
-        eventsIncluded = new LinkedHashMap<>();
+        eventsIncluded = new ArrayList<>();
     }
 
     //#region Gets
@@ -39,7 +37,7 @@ public abstract class Participant {
     public String getEmail(){ return this.email; }
     public String getphone(){ return this.phone; }
     public LocalDate getBirthDate(){ return this.birthDate; }
-    public LinkedHashMap<String, Event> getEventsIncluded(){ return this.eventsIncluded; }
+    public ArrayList<String> getEventsIncluded(){ return this.eventsIncluded; }
     //#endregion 
     
     //#region Sets

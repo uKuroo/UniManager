@@ -12,9 +12,9 @@ import java.util.List;
 
 import br.edu.ifba.inf008.uniManager.domain.entities.events.AcademicFair;
 import br.edu.ifba.inf008.uniManager.domain.entities.events.Event;
-import br.edu.ifba.inf008.uniManager.domain.repositoryInterface.events.IEventRepository;
+import br.edu.ifba.inf008.uniManager.domain.ports.repository.IRepository;
 
-public class FileEventRepository implements IEventRepository{
+public class FileEventRepository implements IRepository<Event>{
     private final String filename = "events.dat";
     
     @Override

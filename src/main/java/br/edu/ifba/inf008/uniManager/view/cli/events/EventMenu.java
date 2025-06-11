@@ -1,4 +1,4 @@
-package br.edu.ifba.inf008.uniManager.view.cli;
+package br.edu.ifba.inf008.uniManager.view.cli.events;
 
 import java.util.Scanner;
 
@@ -6,42 +6,39 @@ import br.edu.ifba.inf008.uniManager.useCase.managers.implementation.EventManage
 import br.edu.ifba.inf008.uniManager.useCase.managers.implementation.ParticipantManager;
 import br.edu.ifba.inf008.uniManager.utils.Exceptions.BadRequestException;
 import br.edu.ifba.inf008.uniManager.utils.MenuUtil;
-import br.edu.ifba.inf008.uniManager.view.cli.events.EventMenu;
+import br.edu.ifba.inf008.uniManager.view.cli.IMenu;
 
-public class HomeMenu implements IMenu {
+public class EventMenu implements IMenu{
     private final EventManager eventManager;
     private final ParticipantManager participantManager;
     private final Scanner scanner;
-
-    public HomeMenu(EventManager eventManager, ParticipantManager participantManager){
+    
+    public EventMenu(EventManager eventManager, ParticipantManager participantManager){
         this.eventManager = eventManager;
         this.participantManager = participantManager;
         this.scanner = new Scanner(System.in);
-
-        show();
     }
-
 
     public void show(){
         int choice;
         do {
             System.out.println(MenuUtil.clearTerminal());
 
-            System.out.println("|===========================================|");
-            System.out.println("|=============== UniManager ================|");
-            System.out.println("|===========================================|");
-            System.out.println("|1. Manage Events                           |");
-            System.out.println("|2. Manage Participants                     |");
-            System.out.println("|3. Manage Certificates                     |");
-            System.out.println("|                                           |");
-            System.out.println("|0. Exit                                    |");
-            System.out.println("|===========================================|");
+        System.out.println("|===========================================|");
+        System.out.println("|================= Events ==================|");
+        System.out.println("|===========================================|");
+        System.out.println("|1. Register a event                        |");
+        System.out.println("|1. List all events                         |");
+        System.out.println("|2. Search for a event                      |");
+        System.out.println("|3. Delete a event                          |");
+        System.out.println("|                                           |");
+        System.out.println("|0. Exit                                    |");
+        System.out.println("|===========================================|");
         
             choice = scanner.nextInt();
             try {
                 switch (choice) {
                     case 0: 
-                        if(MenuUtil.exitConfirm()) return;
                         break;
                     case 1: 
                         new EventMenu(eventManager, participantManager).show();
@@ -52,6 +49,8 @@ public class HomeMenu implements IMenu {
             } catch (Exception e) {
                 MenuUtil.errorScreen(e.getMessage());
             }
-        } while (true);
+        } while (choice != 0);
+
+        return;
     }
 }

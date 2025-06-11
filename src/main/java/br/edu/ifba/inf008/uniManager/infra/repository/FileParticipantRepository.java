@@ -4,9 +4,9 @@ import java.util.LinkedHashMap;
 
 import br.edu.ifba.inf008.uniManager.domain.entities.participants.Participant;
 import br.edu.ifba.inf008.uniManager.domain.entities.participants.Student;
-import br.edu.ifba.inf008.uniManager.domain.repositoryInterface.participants.IParticipantRepository;
+import br.edu.ifba.inf008.uniManager.domain.ports.repository.IRepository;
 
-public class FileParticipantRepository implements IParticipantRepository{
+public class FileParticipantRepository implements IRepository<Participant>{
     private final String filename = "participants.dat";
     
     @Override
@@ -35,7 +35,7 @@ public class FileParticipantRepository implements IParticipantRepository{
     }
 
     @Override
-    public Participant findByCpf(String cpf){
+    public Participant findById(String cpf){
         Student e = new Student(cpf, cpf, cpf, cpf, cpf, null, cpf);//TEST
         return e; 
     }

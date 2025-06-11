@@ -5,6 +5,7 @@
 
 package br.edu.ifba.inf008.uniManager.domain.entities.events;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.LinkedHashMap;
 
@@ -15,7 +16,7 @@ import br.edu.ifba.inf008.uniManager.utils.Exceptions.BadRequestException;
  *
  * @author gabriel
  */
-public abstract class Event {
+public abstract class Event implements Serializable{
     protected String title;
     protected String id;
     protected String description;
@@ -23,7 +24,6 @@ public abstract class Event {
     protected String local;
     protected int capacity;
     protected LinkedHashMap<String, Participant> participants;
-    protected String[] allowedTypesOfParticipants;
 
     public Event(String title, String id, String description, LocalDate date, String local, int capacity){
         this.title = title;
@@ -43,6 +43,10 @@ public abstract class Event {
     public String getLocal(){ return this.local; }
     public int getCapacity(){ return this.capacity; }
     public LinkedHashMap<String, Participant> getParticipants(){ return this.participants; }
+
+    public String getVacancy(){ 
+        return String.format("%d/%d", participants.size(), capacity); 
+    }
     //#endregion
 
     //#region Sets

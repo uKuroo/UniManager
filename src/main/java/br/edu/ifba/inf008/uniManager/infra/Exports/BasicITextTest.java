@@ -1,4 +1,4 @@
-package br.edu.ifba.inf008.uniManager.utils;
+package br.edu.ifba.inf008.uniManager.infra.Exports;
 
 import java.io.IOException;
 
@@ -10,7 +10,7 @@ import com.itextpdf.layout.element.Paragraph;
 public class BasicITextTest{
 
     public void export() {
-        String dest = "../basic_itext_test.pdf"; // Output PDF file path
+        String dest = "files/certificates/basic_itext_test.pdf"; // Output PDF file path
 
         try {
             // Create PdfWriter
