@@ -1,8 +1,6 @@
 package br.edu.ifba.inf008.uniManager.view.cli.events.crud;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import br.edu.ifba.inf008.uniManager.domain.entities.events.Event;
@@ -10,10 +8,12 @@ import br.edu.ifba.inf008.uniManager.domain.entities.participants.Participant;
 import br.edu.ifba.inf008.uniManager.domain.entities.participants.Teacher;
 import br.edu.ifba.inf008.uniManager.useCase.managers.implementation.EventManager;
 import br.edu.ifba.inf008.uniManager.useCase.managers.implementation.ParticipantManager;
-import br.edu.ifba.inf008.uniManager.utils.Exceptions.BadRequestException;
-import br.edu.ifba.inf008.uniManager.utils.MenuUtil;
+import br.edu.ifba.inf008.uniManager.utils.exceptions.BadRequestException;
+import br.edu.ifba.inf008.uniManager.utils.menu.CrudMenuUtil;
+import br.edu.ifba.inf008.uniManager.utils.menu.MenuUtil;
+import br.edu.ifba.inf008.uniManager.view.cli.IMenu;
 
-public class RegisterEventMenu {
+public class RegisterEventMenu implements IMenu{
     private final EventManager eventManager;
     private final ParticipantManager participantManager;
     private final Scanner scanner;
@@ -39,7 +39,7 @@ public class RegisterEventMenu {
             System.out.println("3. Course                                  ");
             System.out.println("4. Lecture                                 ");
             System.out.println("                                           ");
-            System.out.println("0. Exit                                    ");
+            System.out.println("0. Back                                    ");
             System.out.println("===========================================");
         
             line = scanner.nextLine().trim();
@@ -73,12 +73,12 @@ public class RegisterEventMenu {
     }
 
     private void showStepScreen(String type){
-        String title = readStringBasicEvent("Title", type);
-        String id = readId(type);
-        String description = readStringBasicEvent("Description", type);
-        LocalDate date = readDate(type);
-        String local = readStringBasicEvent("Local", type);
-        int capacity = readIntBasicEvent("capacity", type);
+        String title = CrudMenuUtil.readStringBasic("Title", type);
+        String id = CrudMenuUtil.readId(eventManager, type);
+        String description = CrudMenuUtil.readStringBasic("Description", type);
+        LocalDate date = CrudMenuUtil.readDate(type);
+        String local = CrudMenuUtil.readStringBasic("Local", type);
+        int capacity = CrudMenuUtil.readIntBasic("capacity", type);
 
         readSpecificsAttributesAndCreate(title, id, description, date, local, capacity, type);
     }
@@ -86,16 +86,20 @@ public class RegisterEventMenu {
     private void readSpecificsAttributesAndCreate(String title, String id, String description, LocalDate date, String local, int capacity, String type){
         if(type.equals("AcademicFair")){
             try {
-                int numberOfStands = readIntBasicEvent("number of stands", type);
-                String organizerCpf = readStringBasicEvent("organizer Cpf", type);//TODO: procurar pelo cpf do participante;
+                int numberOfStands = CrudMenuUtil.readIntBasic("number of stands", type);
+                
+                Participant organizer = null;
 
-                Teacher teacher = new Teacher("paulao", "33410110054", "bla@gmail.com", "cabula", "71982984223", date);
+                while(organizer == null){
+                    String organizerCpf = CrudMenuUtil.readStringBasic("organizer Cpf", type);
+                    organizer = participantManager.get(organizerCpf);
+                }
     
                 Class<?> clazz = Class.forName(classPath+type);
                 Event event = (Event)clazz.getDeclaredConstructor(
                     String.class , String.class, String.class, LocalDate.class, String.class, int.class, int.class, Participant.class
                 ).newInstance(
-                    title, id, description, date, local, capacity, numberOfStands, teacher
+                    title, id, description, date, local, capacity, numberOfStands, organizer
                 ); 
     
                 eventManager.create(event);
@@ -105,11 +109,14 @@ public class RegisterEventMenu {
         }
         if(type.equals("Workshop")){
             try {
-                int numberOfMaterials = readIntBasicEvent("number of Materials", type);
-                //String organizerCpf = readStringBasicEvent("organizer Cpf", type);//TODO: procurar pelo cpf do participante;
+                int numberOfMaterials = CrudMenuUtil.readIntBasic("number of Materials", type);
+                
+                Participant instructor = null;
 
-                Teacher instructor = new Teacher("paulao", "33410110054", "bla@gmail.com", "cabula", "71982984223", date);
-    
+                while(instructor == null){
+                    String instructorCpf = CrudMenuUtil.readStringBasic("instructor Cpf", type);
+                    instructor = participantManager.get(instructorCpf);
+                }
                 Class<?> clazz = Class.forName(classPath+type);
                 Event event = (Event)clazz.getDeclaredConstructor(
                     String.class , String.class, String.class, LocalDate.class, String.class, int.class, Participant.class, boolean.class
@@ -124,8 +131,17 @@ public class RegisterEventMenu {
         }
         if(type.equals("ShortCourse")){
             try {
-                String subject = readStringBasicEvent("subject", type);//TODO: procurar pelo cpf do participante;
-                Teacher teacher = new Teacher("paulao", "33410110054", "bla@gmail.com", "cabula", "71982984223", date);
+                String subject = CrudMenuUtil.readStringBasic("subject", type);
+
+                Participant teacher = null;
+
+                while(true){
+                    String teacherCpf = CrudMenuUtil.readStringBasic("teacher Cpf", type);
+                    teacher = participantManager.get(teacherCpf);
+
+                    if(teacher instanceof Teacher) break;
+                    MenuUtil.errorScreen("Only Teachers are allowed");
+                }
     
                 Class<?> clazz = Class.forName(classPath+type);
                 Event event = (Event)clazz.getDeclaredConstructor(
@@ -142,8 +158,14 @@ public class RegisterEventMenu {
         }
         if(type.equals("Lecture")){
             try {
-                String theme = readStringBasicEvent("theme", type);//TODO: procurar pelo cpf do participante;
-                Teacher speaker = new Teacher("paulao", "33410110054", "bla@gmail.com", "cabula", "71982984223", date);
+                String theme = CrudMenuUtil.readStringBasic("theme", type);
+
+                Participant speaker = null;
+
+                while(speaker == null){
+                    String speakerCpf = CrudMenuUtil.readStringBasic("speaker Cpf", type);
+                    speaker = participantManager.get(speakerCpf);
+                }
     
                 Class<?> clazz = Class.forName(classPath+type);
                 Event event = (Event)clazz.getDeclaredConstructor(
@@ -159,87 +181,4 @@ public class RegisterEventMenu {
         }
     }
 
-    private String readStringBasicEvent(String element, String type){
-        String input;
-        System.out.println(MenuUtil.clearTerminal());
-
-        System.out.println("===========================================");
-        System.out.println("Insert an "+element+" for the "+type);
-        System.out.println("===========================================");
-        
-        input = scanner.nextLine();
-        return input;
-    } 
-
-    private String readId(String type){
-        int alreadyExist;
-        String id;
-        do { 
-            alreadyExist = 0;
-
-            System.out.println(MenuUtil.clearTerminal());
-            
-            System.out.println("===========================================");
-            System.out.println("Insert an Id for the "+type);
-            System.out.println("===========================================");
-            
-            id = scanner.nextLine();
-            
-            if(eventManager.get(id) != null){
-                MenuUtil.errorScreen("The "+type+" already exists!");
-                alreadyExist = 1;
-            }
-        } while (alreadyExist != 0);
-        
-        return id;
-    }
-
-    private int readIntBasicEvent(String element, String type) {
-        int number = -1;
-        String line;
-        do {
-            System.out.println(MenuUtil.clearTerminal());
-
-            System.out.println("===========================================");
-            System.out.println("Insert a "+element+" of the "+type);
-            System.out.println("===========================================");
-        
-            line = scanner.nextLine().trim();
-            
-            try {
-                number = Integer.parseInt(line);
-            } catch (NumberFormatException e) {
-                MenuUtil.errorScreen(e.getMessage());
-            }
-        } while (number == -1);
-
-        return number;
-    }
-
-    private LocalDate readDate(String type){
-        LocalDate date;
-        String line;
-        do {
-            System.out.println(MenuUtil.clearTerminal());
-
-            System.out.println("===========================================");
-            System.out.println("Insert a Date of the "+type);
-            System.out.println("format: (dd/MM/yyyy)");
-            System.out.println("===========================================");
-        
-            line = scanner.nextLine().trim();
-            
-            try {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-                date = LocalDate.parse(line, formatter);
-
-            } catch (DateTimeParseException e) {
-                MenuUtil.errorScreen(e.getMessage());
-                date = LocalDate.MIN;
-            }
-        } while (date == LocalDate.MIN);
-
-        return date;
-    }
 }

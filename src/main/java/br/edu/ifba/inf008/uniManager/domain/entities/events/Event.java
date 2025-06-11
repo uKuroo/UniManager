@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.LinkedHashMap;
 
 import br.edu.ifba.inf008.uniManager.domain.entities.participants.Participant;
-import br.edu.ifba.inf008.uniManager.utils.Exceptions.BadRequestException;
+import br.edu.ifba.inf008.uniManager.utils.exceptions.BadRequestException;
 
 /**
  *
@@ -68,5 +68,7 @@ public abstract class Event implements Serializable{
             throw new BadRequestException("It was not possible to register because the" + participant.getClass().getSimpleName() + "is already participating");
 
         participants.put(participant.getCpf(), participant);
+
+        participant.addEvent(this);
     }
 }

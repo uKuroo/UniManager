@@ -6,9 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 
 import br.edu.ifba.inf008.uniManager.domain.entities.events.AcademicFair;
 import br.edu.ifba.inf008.uniManager.domain.entities.events.Event;
@@ -54,6 +52,15 @@ public class FileEventRepository implements IRepository<Event>{
             throw new RuntimeException("Error saving events to file .dat", e);
         }
     }
+
+    @Override
+    public boolean delete(String id) {
+    if (events.remove(id) != null) {
+        saveToFile();
+        return true;
+    }
+    return false;
+    }   
 
     private LinkedHashMap<String, Event> loadFromFile() {
         File file = new File(filename);

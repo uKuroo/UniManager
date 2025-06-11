@@ -8,6 +8,9 @@ package br.edu.ifba.inf008.uniManager.domain.entities.participants;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+
+import br.edu.ifba.inf008.uniManager.domain.entities.events.Event;
 
 /**
  *
@@ -20,7 +23,8 @@ public abstract class Participant implements Serializable{
     protected String address;
     protected String phone;
     protected LocalDate birthDate;
-    protected ArrayList<String> eventsIncluded;
+    protected transient LinkedHashMap<String, Event> eventsIncluded;
+    protected ArrayList<String> eventsIdIncluded;
 
     public Participant(String name, String cpf, String email, String address, String phone, LocalDate birthDate){
         this.name = name;
@@ -29,7 +33,8 @@ public abstract class Participant implements Serializable{
         this.address = address;
         this.phone = phone;
         this.birthDate = birthDate;
-        eventsIncluded = new ArrayList<>();
+        this.eventsIncluded = new LinkedHashMap<>();
+        this.eventsIdIncluded = new ArrayList<>();
     }
 
     //#region Gets
@@ -38,7 +43,7 @@ public abstract class Participant implements Serializable{
     public String getEmail(){ return this.email; }
     public String getphone(){ return this.phone; }
     public LocalDate getBirthDate(){ return this.birthDate; }
-    public ArrayList<String> getEventsIncluded(){ return this.eventsIncluded; }
+    public LinkedHashMap<String, Event> getEventsIdIncluded(){ return this.eventsIncluded; }
     //#endregion 
     
     //#region Sets
@@ -48,6 +53,10 @@ public abstract class Participant implements Serializable{
     public void setphone(String phone){ this.phone = phone; }
     public void setBirthDate(LocalDate birthDate){ this.birthDate = birthDate; }
     //#endregion
+    
+    public void addEvent(Event event){
+        eventsIncluded.put(event.getId(), event);
+    }
 
     public abstract String getType();
 }

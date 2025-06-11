@@ -15,7 +15,7 @@ public class AcademicFair extends Event implements Serializable{
         this.organizer = organizer;
     }
 
-    public Participant getOrganizers(){ return this.organizer; }
+    public Participant getOrganizer(){ return this.organizer; }
     public int getNumberOfStands(){ return this.numberOfStands; }
 
     public void setNumberOfStands(int numberOfStands){ this.numberOfStands = numberOfStands; }

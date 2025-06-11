@@ -4,10 +4,12 @@ import java.util.Scanner;
 
 import br.edu.ifba.inf008.uniManager.useCase.managers.implementation.EventManager;
 import br.edu.ifba.inf008.uniManager.useCase.managers.implementation.ParticipantManager;
-import br.edu.ifba.inf008.uniManager.utils.Exceptions.BadRequestException;
-import br.edu.ifba.inf008.uniManager.utils.MenuUtil;
+import br.edu.ifba.inf008.uniManager.utils.exceptions.BadRequestException;
+import br.edu.ifba.inf008.uniManager.utils.menu.MenuUtil;
 import br.edu.ifba.inf008.uniManager.view.cli.IMenu;
-import br.edu.ifba.inf008.uniManager.view.cli.events.EventMenu;
+import br.edu.ifba.inf008.uniManager.view.cli.events.crud.DetailEventMenu;
+import br.edu.ifba.inf008.uniManager.view.cli.events.crud.ListEventMenu;
+import br.edu.ifba.inf008.uniManager.view.cli.participants.crud.RegisterParticipantMenu;
 
 public class ParticipantMenu implements IMenu{
     private final EventManager eventManager;
@@ -26,16 +28,15 @@ public class ParticipantMenu implements IMenu{
         do {
             System.out.println(MenuUtil.clearTerminal());
 
-            System.out.println("|===========================================|");
-            System.out.println("|============== Participants ===============|");
-            System.out.println("|===========================================|");
-            System.out.println("|1. Register a participant                  |");
-            System.out.println("|2. List all participant                    |");
-            System.out.println("|3. Search for a participant                |");
-            System.out.println("|4. Delete a participant                    |");
-            System.out.println("|                                           |");
-            System.out.println("|0. Exit                                    |");
-            System.out.println("|===========================================|");
+            System.out.println("===========================================");
+            System.out.println("================= Events ==================");
+            System.out.println("===========================================");
+            System.out.println("1. Register a Participant                  ");
+            System.out.println("2. List Participants                       ");
+            System.out.println("3. Detail an Participant                   ");
+            System.out.println("                                           ");
+            System.out.println("0. Back                                    ");
+            System.out.println("===========================================");
         
             line = scanner.nextLine().trim();
             
@@ -45,7 +46,13 @@ public class ParticipantMenu implements IMenu{
                     case 0: 
                         break;
                     case 1: 
-                        new EventMenu(eventManager, participantManager).show();
+                        new RegisterParticipantMenu(eventManager, participantManager).show();
+                        break;
+                    case 2: 
+                        new ListEventMenu(eventManager, participantManager).show();
+                        break;
+                    case 3: 
+                        new DetailEventMenu(eventManager, participantManager).show();
                         break;
                     default:
                         throw new BadRequestException(choice + " isn't an option");

@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 import br.edu.ifba.inf008.uniManager.useCase.managers.implementation.EventManager;
 import br.edu.ifba.inf008.uniManager.useCase.managers.implementation.ParticipantManager;
-import br.edu.ifba.inf008.uniManager.utils.Exceptions.BadRequestException;
-import br.edu.ifba.inf008.uniManager.utils.MenuUtil;
+import br.edu.ifba.inf008.uniManager.utils.exceptions.BadRequestException;
+import br.edu.ifba.inf008.uniManager.utils.menu.MenuUtil;
 import br.edu.ifba.inf008.uniManager.view.cli.events.EventMenu;
 import br.edu.ifba.inf008.uniManager.view.cli.participants.ParticipantMenu;
 

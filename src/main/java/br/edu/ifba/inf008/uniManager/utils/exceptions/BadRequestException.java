@@ -1,4 +1,4 @@
-package br.edu.ifba.inf008.uniManager.utils.Exceptions;
+package br.edu.ifba.inf008.uniManager.utils.exceptions;
 
 public class BadRequestException extends RuntimeException {
 

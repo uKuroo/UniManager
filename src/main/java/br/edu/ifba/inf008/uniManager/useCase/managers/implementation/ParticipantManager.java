@@ -9,16 +9,17 @@ import br.edu.ifba.inf008.uniManager.useCase.managers.interfaces.IManager;
 
 public class ParticipantManager implements IManager<Participant>{
     private static LinkedHashMap<String, Participant> participants;
-    private final IRepository<Participant> participantRepository;
+    private final IRepository<Participant> repository;
 
-    public ParticipantManager(IRepository<Participant> participantRepository){
-        this.participantRepository = participantRepository;
-        this.participants = participantRepository.getAll();
+    public ParticipantManager(IRepository<Participant> repository){
+        this.repository = repository;
+        this.participants = repository.getAll();
     }
 
     @Override
     public void create(Participant participant){
         participants.put(participant.getCpf(), participant);
+        repository.save(participant);
     }
 
     @Override
@@ -29,11 +30,13 @@ public class ParticipantManager implements IManager<Participant>{
     @Override
     public void update(String key, Participant participant){
         participants.put(key, participant);
+        repository.save(participant);
     }
 
     @Override
     public void delete(String key){
         participants.remove(key);
+        repository.delete(key);
     }
 
     @Override

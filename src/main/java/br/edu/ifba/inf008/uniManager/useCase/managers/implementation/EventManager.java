@@ -23,18 +23,20 @@ public class EventManager implements IManager<Event>{
     }
 
     @Override
-    public Event get(String key){
-        return events.get(key);
+    public Event get(String id){
+        return events.get(id);
     }
 
     @Override
-    public void update(String key, Event event){
-        events.put(key, event);
+    public void update(String id, Event event){
+        events.put(id, event);
+        repository.save(event);
     }
 
     @Override
-    public void delete(String key){
-        events.remove(key);
+    public void delete(String id){
+        events.remove(id);
+        repository.delete(id);
     }
 
     @Override
@@ -55,5 +57,13 @@ public class EventManager implements IManager<Event>{
         }
 
         return fromType;
+    }
+
+    public boolean export(String id){
+        try {
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
