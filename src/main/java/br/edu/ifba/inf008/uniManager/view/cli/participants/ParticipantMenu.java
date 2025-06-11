@@ -29,7 +29,7 @@ public class ParticipantMenu implements IMenu{
             System.out.println(MenuUtil.clearTerminal());
 
             System.out.println("===========================================");
-            System.out.println("================= Events ==================");
+            System.out.println("============== Participants ===============");
             System.out.println("===========================================");
             System.out.println("1. Register a Participant                  ");
             System.out.println("2. List Participants                       ");

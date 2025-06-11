@@ -69,6 +69,6 @@ public abstract class Event implements Serializable{
 
         participants.put(participant.getCpf(), participant);
 
-        participant.addEvent(this);
+        participant.addEvent(this.id);
     }
 }

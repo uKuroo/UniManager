@@ -23,8 +23,7 @@ public abstract class Participant implements Serializable{
     protected String address;
     protected String phone;
     protected LocalDate birthDate;
-    protected transient LinkedHashMap<String, Event> eventsIncluded;
-    protected ArrayList<String> eventsIdIncluded;
+    protected ArrayList<String> eventsIdIncluded = new ArrayList<>();
 
     public Participant(String name, String cpf, String email, String address, String phone, LocalDate birthDate){
         this.name = name;
@@ -33,8 +32,6 @@ public abstract class Participant implements Serializable{
         this.address = address;
         this.phone = phone;
         this.birthDate = birthDate;
-        this.eventsIncluded = new LinkedHashMap<>();
-        this.eventsIdIncluded = new ArrayList<>();
     }
 
     //#region Gets
@@ -43,7 +40,7 @@ public abstract class Participant implements Serializable{
     public String getEmail(){ return this.email; }
     public String getphone(){ return this.phone; }
     public LocalDate getBirthDate(){ return this.birthDate; }
-    public LinkedHashMap<String, Event> getEventsIdIncluded(){ return this.eventsIncluded; }
+    public ArrayList<String> getEventsIdIncluded(){ return this.eventsIdIncluded; }
     //#endregion 
     
     //#region Sets
@@ -54,8 +51,8 @@ public abstract class Participant implements Serializable{
     public void setBirthDate(LocalDate birthDate){ this.birthDate = birthDate; }
     //#endregion
     
-    public void addEvent(Event event){
-        eventsIncluded.put(event.getId(), event);
+    public void addEvent(String id){
+        eventsIdIncluded.add(id);
     }
 
     public abstract String getType();

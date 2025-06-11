@@ -38,16 +38,17 @@ public class DetailEventMenu implements IMenu{
             System.out.println("===========================================");
         
             line = scanner.nextLine().trim();
+            if(line.equals("0")) return;
             
             try {
                 showDetailedEvent(line);
             } catch (BadRequestException e) {
                 MenuUtil.errorScreen(e.getMessage());
             }
-        } while(!line.equals("0"));
+        } while(true);
     }
 
-    private void showDetailedEvent(String id){
+    private boolean showDetailedEvent(String id){
         int choice = -1;
         String line;
 
@@ -110,14 +111,15 @@ public class DetailEventMenu implements IMenu{
                         break;
                     case 3: 
                         new DeleteEventMenu(eventManager, participantManager).showConfirmation(id);
-                        return;
                     default:
                         throw new BadRequestException(choice + " isn't an option");
                 }
             } catch (BadRequestException | NumberFormatException e) {
                 MenuUtil.errorScreen(e.getMessage());
             }
-        } while (true);
+        } while (choice != 0);
+
+        return true;
     }
         
     private void subscribeParticipant(String id){
@@ -133,7 +135,7 @@ public class DetailEventMenu implements IMenu{
             
             try {
                 input = scanner.nextLine();
-                if(input.equals("0")) continue;
+                if (input.equals("0")) return;
                 
                 Participant participant = participantManager.get(input);
                 Event event = eventManager.get(id);
@@ -146,7 +148,7 @@ public class DetailEventMenu implements IMenu{
             } catch (BadRequestException e) {
                 MenuUtil.errorScreen(e.getMessage());
             }
-        } while (!input.equals("0"));
+        } while (!input.equals("back"));
     }
 
     private void showSpecificAttribute(Event event){
@@ -163,7 +165,7 @@ public class DetailEventMenu implements IMenu{
         if(event instanceof ShortCourse){
             ShortCourse shortCourse = (ShortCourse) event;
             System.out.println("Subject: "+ (shortCourse.getSubject()));
-            System.out.println("Teacher "+ (shortCourse.getTeacher().getName())+" Cpf: "+ (shortCourse.getTeacher().getCpf()));
+            System.out.println("Teacher: "+ (shortCourse.getTeacher().getName())+" Cpf: "+ (shortCourse.getTeacher().getCpf()));
         }
         if(event instanceof Workshop){
             Workshop workshop = (Workshop) event;
