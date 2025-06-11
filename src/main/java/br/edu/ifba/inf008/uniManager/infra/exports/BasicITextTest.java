@@ -1,4 +1,4 @@
-package br.edu.ifba.inf008.uniManager.infra.Exports;
+package br.edu.ifba.inf008.uniManager.infra.exports;
 
 import java.io.IOException;
 

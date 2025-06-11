@@ -6,12 +6,14 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import br.edu.ifba.inf008.uniManager.useCase.managers.interfaces.IManager;
+import br.edu.ifba.inf008.uniManager.utils.validator.Validator;
 
 public class CrudMenuUtil {
     public static Scanner scanner = new Scanner(System.in);
 
     public static String readId(IManager<?> manager, String type, String element){
-        int alreadyExist;
+        int repeat = 1;
+        int alreadyExist = 0;
         String id;
         do { 
             alreadyExist = 0;
@@ -23,12 +25,21 @@ public class CrudMenuUtil {
             System.out.println("===========================================");
             
             id = scanner.nextLine();
-            
+
+            if(element.equals("cpf")){
+                if(!Validator.validateCpf(id)){
+                    MenuUtil.errorScreen("Invalid Cpf!");
+                    continue;
+                }else{
+                    repeat = 0;
+                }
+
             if(manager.get(id) != null){
-                MenuUtil.errorScreen("The "+type+" already exists!");
-                alreadyExist = 1;
+                    MenuUtil.errorScreen("The "+type+" already exists!");
+                    alreadyExist = 1;
+                }
             }
-        } while (alreadyExist != 0);
+        } while (repeat == 1 && alreadyExist != 1);
         
         return id;
     }

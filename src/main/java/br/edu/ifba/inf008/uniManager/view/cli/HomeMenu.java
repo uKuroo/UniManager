@@ -2,6 +2,8 @@ package br.edu.ifba.inf008.uniManager.view.cli;
 
 import java.util.Scanner;
 
+import br.edu.ifba.inf008.uniManager.domain.entities.events.Event;
+import br.edu.ifba.inf008.uniManager.domain.ports.exports.ICertificateExporter;
 import br.edu.ifba.inf008.uniManager.useCase.managers.implementation.EventManager;
 import br.edu.ifba.inf008.uniManager.useCase.managers.implementation.ParticipantManager;
 import br.edu.ifba.inf008.uniManager.utils.exceptions.BadRequestException;
@@ -12,11 +14,13 @@ import br.edu.ifba.inf008.uniManager.view.cli.participants.ParticipantMenu;
 public class HomeMenu implements IMenu {
     private final EventManager eventManager;
     private final ParticipantManager participantManager;
+    private final ICertificateExporter<Event> certificateExporter;
     private final Scanner scanner;
 
-    public HomeMenu(EventManager eventManager, ParticipantManager participantManager){
+    public HomeMenu(EventManager eventManager, ParticipantManager participantManager, ICertificateExporter<Event> certificateExporter){
         this.eventManager = eventManager;
         this.participantManager = participantManager;
+        this.certificateExporter = certificateExporter;
         this.scanner = new Scanner(System.in);
 
         show();
@@ -34,7 +38,6 @@ public class HomeMenu implements IMenu {
             System.out.println("===========================================");
             System.out.println("1. Manage Events                           ");
             System.out.println("2. Manage Participants                     ");
-            System.out.println("3. Manage Certificates                     ");
             System.out.println("                                           ");
             System.out.println("0. Exit                                    ");
             System.out.println("===========================================");
@@ -47,7 +50,7 @@ public class HomeMenu implements IMenu {
                         if(MenuUtil.exitConfirm()) return;
                         break;
                     case 1: 
-                        new EventMenu(eventManager, participantManager).show();
+                        new EventMenu(eventManager, participantManager, certificateExporter).show();
                         break;
                     case 2:
                         new ParticipantMenu(eventManager, participantManager).show();

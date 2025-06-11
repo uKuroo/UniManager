@@ -10,6 +10,7 @@ import br.edu.ifba.inf008.uniManager.domain.entities.events.Lecture;
 import br.edu.ifba.inf008.uniManager.domain.entities.events.ShortCourse;
 import br.edu.ifba.inf008.uniManager.domain.entities.events.Workshop;
 import br.edu.ifba.inf008.uniManager.domain.entities.participants.Participant;
+import br.edu.ifba.inf008.uniManager.domain.ports.exports.ICertificateExporter;
 import br.edu.ifba.inf008.uniManager.useCase.managers.implementation.EventManager;
 import br.edu.ifba.inf008.uniManager.useCase.managers.implementation.ParticipantManager;
 import br.edu.ifba.inf008.uniManager.utils.exceptions.BadRequestException;
@@ -19,11 +20,13 @@ import br.edu.ifba.inf008.uniManager.view.cli.IMenu;
 public class DetailEventMenu implements IMenu{
     private final EventManager eventManager;
     private final ParticipantManager participantManager;
+    private final ICertificateExporter<Event> certificateExporter;
     private final Scanner scanner;
     
-    public DetailEventMenu(EventManager eventManager, ParticipantManager participantManager){
+    public DetailEventMenu(EventManager eventManager, ParticipantManager participantManager, ICertificateExporter<Event> certificateExporter){
         this.eventManager = eventManager;
         this.participantManager = participantManager;
+        this.certificateExporter = certificateExporter;
         this.scanner = new Scanner(System.in);
     }
 
@@ -84,8 +87,9 @@ public class DetailEventMenu implements IMenu{
             }
             System.out.println("                                           ");
             System.out.println("1. Subscribe a Participant                 ");
-            System.out.println("2. Export a current report                 ");
-            System.out.println("3. Delete                                  ");
+            System.out.println("2. unsubscribe a Participant               ");
+            System.out.println("3. Export a current report                 ");
+            System.out.println("4. Delete                                  ");
             System.out.println("                                           ");
             System.out.println("0. Back                                    ");
             System.out.println("===========================================");
@@ -101,15 +105,20 @@ public class DetailEventMenu implements IMenu{
                         subscribeParticipant(id);
                         break;
                     case 2: 
-                        if(eventManager.export(id)){
-                            //tela de exportado
-                        }else{
-                            //tela de falha na exportação
+                        subscribeParticipant(id);
+                        break;
+                    case 3: 
+                        try {
+                            certificateExporter.export(eventManager.get(id));
+
+                            MenuUtil.successScreen("Pdf was created at files folder!");
+                        } catch (Exception e) {
+                            MenuUtil.errorScreen(e.getMessage());
                         }
 
                         break;
-                    case 3: 
-                        new DeleteEventMenu(eventManager, participantManager).showConfirmation(id);
+                    case 4: 
+                        if(new DeleteEventMenu(eventManager, participantManager).showConfirmation(id)) return true;
                     default:
                         throw new BadRequestException(choice + " isn't an option");
                 }
@@ -146,6 +155,35 @@ public class DetailEventMenu implements IMenu{
                 eventManager.update(id, event);
                 
                 MenuUtil.successScreen(participant.getName()+" is now participating to the "+ event.getType());
+            } catch (BadRequestException e) {
+                MenuUtil.errorScreen(e.getMessage());
+            }
+        } while (!input.equals("back"));
+    }
+
+    private void unSubscribeParticipant(String id){
+        String input = "";
+        do { 
+            
+            System.out.println(MenuUtil.clearTerminal());
+            
+            System.out.println("===========================================");
+            System.out.println("Insert the CPF of the desired participant  ");
+            System.out.println("(type 0 to go back)                        ");
+            System.out.println("===========================================");
+            
+            try {
+                input = scanner.nextLine();
+                if (input.equals("0")) return;
+                
+                Participant participant = participantManager.get(input);
+                Event event = eventManager.get(id);
+
+                if(participant == null) throw new BadRequestException("Incorrect cpf!");
+
+                if(!event.unSubscribeParticipant(input)) throw new BadRequestException("Incorrect cpf or the Participant is not included in the Event");
+                
+                MenuUtil.successScreen(participant.getName()+" leave the "+ event.getType());
             } catch (BadRequestException e) {
                 MenuUtil.errorScreen(e.getMessage());
             }

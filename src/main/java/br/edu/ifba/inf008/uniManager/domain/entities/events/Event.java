@@ -71,4 +71,12 @@ public abstract class Event implements Serializable{
 
         participant.addEvent(this.id);
     }
+
+    public boolean  unSubscribeParticipant(String cpf){
+        boolean excluido = true;
+        if(participants.get(cpf) == null) excluido = false;
+        participants.remove(cpf);
+
+        return excluido;
+    }
 }

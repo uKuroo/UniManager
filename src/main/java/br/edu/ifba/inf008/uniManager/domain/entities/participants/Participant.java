@@ -8,9 +8,6 @@ package br.edu.ifba.inf008.uniManager.domain.entities.participants;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-
-import br.edu.ifba.inf008.uniManager.domain.entities.events.Event;
 
 public abstract class Participant implements Serializable{
     private static final long serialVersionUID = 1L;
@@ -52,6 +49,10 @@ public abstract class Participant implements Serializable{
     
     public void addEvent(String id){
         eventsIdIncluded.add(id);
+    }
+
+    public void removeEvent(String id){
+        eventsIdIncluded.remove(id);
     }
 
     public abstract String getType();

@@ -7,8 +7,7 @@ import br.edu.ifba.inf008.uniManager.useCase.managers.implementation.Participant
 import br.edu.ifba.inf008.uniManager.utils.exceptions.BadRequestException;
 import br.edu.ifba.inf008.uniManager.utils.menu.MenuUtil;
 import br.edu.ifba.inf008.uniManager.view.cli.IMenu;
-import br.edu.ifba.inf008.uniManager.view.cli.events.crud.DetailEventMenu;
-import br.edu.ifba.inf008.uniManager.view.cli.events.crud.ListEventMenu;
+import br.edu.ifba.inf008.uniManager.view.cli.participants.crud.DetailParticipantMenu;
 import br.edu.ifba.inf008.uniManager.view.cli.participants.crud.ListParticipantMenu;
 import br.edu.ifba.inf008.uniManager.view.cli.participants.crud.RegisterParticipantMenu;
 
@@ -53,7 +52,7 @@ public class ParticipantMenu implements IMenu{
                         new ListParticipantMenu(eventManager, participantManager).show();
                         break;
                     case 3: 
-                        new DetailEventMenu(eventManager, participantManager).show();
+                        new DetailParticipantMenu(eventManager, participantManager).show();
                         break;
                     default:
                         throw new BadRequestException(choice + " isn't an option");

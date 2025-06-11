@@ -1,4 +1,4 @@
-package br.edu.ifba.inf008.uniManager.view.cli.events.crud;
+package br.edu.ifba.inf008.uniManager.view.cli.participants.crud;
 
 import java.util.Scanner;
 
@@ -6,12 +6,12 @@ import br.edu.ifba.inf008.uniManager.useCase.managers.implementation.EventManage
 import br.edu.ifba.inf008.uniManager.useCase.managers.implementation.ParticipantManager;
 import br.edu.ifba.inf008.uniManager.utils.menu.MenuUtil;
 
-public class DeleteEventMenu{
+public class DeleteParticipantMenu {
     private final EventManager eventManager;
     private final ParticipantManager participantManager;
     private final Scanner scanner;
     
-    public DeleteEventMenu(EventManager eventManager, ParticipantManager participantManager){
+    public DeleteParticipantMenu(EventManager eventManager, ParticipantManager participantManager){
         this.eventManager = eventManager;
         this.participantManager = participantManager;
         this.scanner = new Scanner(System.in);
@@ -28,11 +28,9 @@ public class DeleteEventMenu{
         String line = new Scanner(System.in).nextLine().trim();
             
         if(line.equals("del")){
-            eventManager.delete(id);
+            participantManager.delete(id);
 
-            participantManager.removeEventForAll(id);
-
-            MenuUtil.successScreen("Event was deleted with success!");
+            MenuUtil.successScreen("Participant was deleted with success!");
 
             return true;
         }

@@ -38,6 +38,12 @@ public class ParticipantManager implements IManager<Participant>{
         participants.remove(key);
         repository.delete(key);
     }
+    
+    public void removeEventForAll(String eventId){
+        for (Map.Entry<String, Participant> participant : participants.entrySet()) {
+            participant.getValue().removeEvent(eventId);
+        }
+    }
 
     @Override
     public LinkedHashMap<String, Participant> getAll(){

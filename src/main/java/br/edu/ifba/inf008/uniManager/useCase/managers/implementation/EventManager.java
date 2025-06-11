@@ -4,15 +4,18 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import br.edu.ifba.inf008.uniManager.domain.entities.events.Event;
+import br.edu.ifba.inf008.uniManager.domain.ports.exports.ICertificateExporter;
 import br.edu.ifba.inf008.uniManager.domain.ports.repository.IRepository;
 import br.edu.ifba.inf008.uniManager.useCase.managers.interfaces.IManager;
 
 public class EventManager implements IManager<Event>{
     private static LinkedHashMap<String, Event> events;
     private final IRepository<Event> repository;
+    private final ICertificateExporter<Event> certificateExporter;
 
-    public EventManager(IRepository<Event> repository){
+    public EventManager(IRepository<Event> repository, ICertificateExporter<Event> certificateExporter){
         this.repository = repository;
+        this.certificateExporter = certificateExporter;
         this.events = repository.getAll();
     }
 
@@ -39,6 +42,12 @@ public class EventManager implements IManager<Event>{
         repository.delete(id);
     }
 
+    public void removeParticipantForAll(String cpf){
+        for (Map.Entry<String, Event> event : events.entrySet()) {
+            event.getValue().unSubscribeParticipant(cpf);
+        }
+    }
+
     @Override
     public LinkedHashMap<String, Event> getAll(){
         return events;
@@ -61,6 +70,10 @@ public class EventManager implements IManager<Event>{
 
     public boolean export(String id){
         try {
+            Event event = events.get(id);
+
+            
+
             return true;
         } catch (Exception e) {
             return false;
