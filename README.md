@@ -15,29 +15,7 @@ Academic event management system with support for multiple types of participants
 
 ### Folder Structure
 
-src/
-└── main/
-    └── java/
-       └── br/edu/ifba/inf008/uniManager/
-           ├── domain/
-           │   ├── entities/            # Domain Entities (Event, Participant, etc.)
-           │   ├── ports/               # Repository and service interfaces
-           ├── infra/
-           │   ├── repository/          # Repository implementations (.dat)
-           │   └── exports/             # Export implementations (PDF)
-           ├── useCase/                 # Business rules and orchestration
-           ├── view/
-           │   └── cli/                 # UI (Command-Line Interface)
-           ├── utils/                   # Utils (menus, validators, exceptioins)
-           └── App.java                 # (main)
-    
-
-files/
-├── binaries/
-│   └── events.dat                      # Persistence of serialized events
-│   └── participants.dat                # Persistence of serialized participants
-└── reports/
-    └── *.pdf                           # Reports in Pdf
+<pre lang="markdown"> ### 📁 Folder Structure ```plaintext src/ └── main/ └── java/ └── br/edu/ifba/inf008/uniManager/ ├── domain/ │ ├── entities/ # Domain Entities (Event, Participant, etc.) │ └── ports/ # Repository and service interfaces ├── infra/ │ ├── repository/ # Repository implementations (.dat) │ └── exports/ # Export implementations (PDF) ├── useCase/ # Business rules and orchestration ├── view/ │ └── cli/ # UI (Command-Line Interface) ├── utils/ # Utils (menus, validators, exceptions) └── App.java # Main application files/ ├── binaries/ │ ├── events.dat # Persistence of serialized events │ └── participants.dat # Persistence of serialized participants └── reports/ └── *.pdf # PDF certificates ``` </pre>
 
 ## 🚀 How to Run the Project
 
