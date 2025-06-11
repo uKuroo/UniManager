@@ -14,7 +14,7 @@ public class MenuUtil {
 
     public static void errorScreen(String message){
         System.out.println(clearTerminal());
-        System.out.println("\033[33m"+message+"\033[0m" + " (type anything to continue)");
+        System.out.println("\u001B[32m"+message+"\u001B[0m" + " (type anything to continue)");
         waitAnyInput();
     }
     

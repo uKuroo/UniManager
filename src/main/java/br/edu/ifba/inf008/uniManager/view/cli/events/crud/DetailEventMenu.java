@@ -38,8 +38,6 @@ public class DetailEventMenu implements IMenu{
             System.out.println("===========================================");
         
             line = scanner.nextLine().trim();
-
-            if(line.equals("0")) continue;
             
             try {
                 showDetailedEvent(line);
