@@ -9,6 +9,7 @@ import br.edu.ifba.inf008.uniManager.utils.menu.MenuUtil;
 import br.edu.ifba.inf008.uniManager.view.cli.IMenu;
 import br.edu.ifba.inf008.uniManager.view.cli.events.crud.DetailEventMenu;
 import br.edu.ifba.inf008.uniManager.view.cli.events.crud.ListEventMenu;
+import br.edu.ifba.inf008.uniManager.view.cli.participants.crud.ListParticipantMenu;
 import br.edu.ifba.inf008.uniManager.view.cli.participants.crud.RegisterParticipantMenu;
 
 public class ParticipantMenu implements IMenu{
@@ -49,7 +50,7 @@ public class ParticipantMenu implements IMenu{
                         new RegisterParticipantMenu(eventManager, participantManager).show();
                         break;
                     case 2: 
-                        new ListEventMenu(eventManager, participantManager).show();
+                        new ListParticipantMenu(eventManager, participantManager).show();
                         break;
                     case 3: 
                         new DetailEventMenu(eventManager, participantManager).show();

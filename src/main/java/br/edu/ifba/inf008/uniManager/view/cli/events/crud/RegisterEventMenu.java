@@ -74,7 +74,7 @@ public class RegisterEventMenu implements IMenu{
 
     private void showStepScreen(String type){
         String title = CrudMenuUtil.readStringBasic("Title", type);
-        String id = CrudMenuUtil.readId(eventManager, type);
+        String id = CrudMenuUtil.readId(eventManager, type, "id");
         String description = CrudMenuUtil.readStringBasic("Description", type);
         LocalDate date = CrudMenuUtil.readDate(type);
         String local = CrudMenuUtil.readStringBasic("Local", type);
@@ -131,6 +131,7 @@ public class RegisterEventMenu implements IMenu{
         }
         if(type.equals("ShortCourse")){
             try {
+                String link;
                 String subject = CrudMenuUtil.readStringBasic("subject", type);
 
                 Participant teacher = null;
@@ -142,13 +143,25 @@ public class RegisterEventMenu implements IMenu{
                     if(teacher instanceof Teacher) break;
                     MenuUtil.errorScreen("Only Teachers are allowed");
                 }
-    
+
                 Class<?> clazz = Class.forName(classPath+type);
-                Event event = (Event)clazz.getDeclaredConstructor(
-                    String.class , String.class, String.class, LocalDate.class, String.class, int.class, Teacher.class, String.class
-                ).newInstance(
-                    title, id, description, date, local, capacity, teacher, subject
-                ); 
+                Event event;
+
+                if(askOnlineOrNot()){
+                    link = CrudMenuUtil.readStringBasic("Meet Link", type);
+
+                    event = (Event)clazz.getDeclaredConstructor(
+                        String.class , String.class, String.class, LocalDate.class, String.class, int.class, Teacher.class, String.class, String.class
+                    ).newInstance(
+                        title, id, description, date, local, capacity, teacher, subject, link
+                    ); 
+                }else{
+                    event = (Event)clazz.getDeclaredConstructor(
+                        String.class , String.class, String.class, LocalDate.class, String.class, int.class, Teacher.class, String.class
+                    ).newInstance(
+                        title, id, description, date, local, capacity, teacher, subject
+                    ); 
+                }
     
                 eventManager.create(event);
             } catch (Exception e) {
@@ -179,6 +192,39 @@ public class RegisterEventMenu implements IMenu{
                 MenuUtil.errorScreen(e.getMessage());
             }
         }
+    }
+
+    private boolean askOnlineOrNot(){
+        int choice = -1;
+        String line;
+        do {
+            System.out.println(MenuUtil.clearTerminal());
+
+            System.out.println("===========================================");
+            System.out.println("Will the course be online?");
+            System.out.println("===========================================");
+            System.out.println("1. Yes                                     ");
+            System.out.println("2. No                                      ");
+            System.out.println("===========================================");
+        
+            line = scanner.nextLine().trim();
+            
+            try {
+                choice = Integer.parseInt(line);
+                switch (choice) {
+                    case 0: 
+                        break;
+                    case 1: 
+                        return true;
+                    case 2: 
+                        return false;
+                    default:
+                        throw new BadRequestException(choice + " isn't an option");
+                }
+            } catch (BadRequestException | NumberFormatException e) {
+                MenuUtil.errorScreen(e.getMessage());
+            }
+        } while (true);
     }
 
 }

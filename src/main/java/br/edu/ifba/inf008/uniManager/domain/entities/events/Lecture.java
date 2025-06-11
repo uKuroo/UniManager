@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import br.edu.ifba.inf008.uniManager.domain.entities.participants.Participant;
 
 public class Lecture extends Event implements Serializable{
+    private static final long serialVersionUID = 1L;
     private Participant speaker;
     private String theme;
 

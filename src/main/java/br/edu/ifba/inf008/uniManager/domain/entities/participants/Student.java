@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Student extends Participant implements Serializable{
+    private static final long serialVersionUID = 1L;
     private final String registration;
     private final String instituition;
 
@@ -14,6 +15,7 @@ public class Student extends Participant implements Serializable{
     }
 
     public String getRegistration(){ return this.registration; }
+    public String getInstituition(){ return this.instituition; }
 
     @Override
     public String getType(){

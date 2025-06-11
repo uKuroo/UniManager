@@ -17,13 +17,14 @@ import br.edu.ifba.inf008.uniManager.utils.exceptions.BadRequestException;
  * @author gabriel
  */
 public abstract class Event implements Serializable{
+    private static final long serialVersionUID = 1L;
     protected String title;
     protected String id;
     protected String description;
     protected LocalDate date;
     protected String local;
     protected int capacity;
-    protected LinkedHashMap<String, Participant> participants;
+    protected LinkedHashMap<String, Participant> participants = new LinkedHashMap<>();
 
     public Event(String title, String id, String description, LocalDate date, String local, int capacity){
         this.title = title;
@@ -32,7 +33,6 @@ public abstract class Event implements Serializable{
         this.date = date;
         this.local = local;
         this.capacity = capacity;
-        this.participants = new LinkedHashMap<>();
     }
 
     //#region Gets

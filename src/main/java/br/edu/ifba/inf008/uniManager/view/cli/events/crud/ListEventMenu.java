@@ -5,12 +5,14 @@ import java.util.Map;
 import java.util.Scanner;
 
 import br.edu.ifba.inf008.uniManager.domain.entities.events.Event;
+import br.edu.ifba.inf008.uniManager.domain.entities.events.ShortCourse;
 import br.edu.ifba.inf008.uniManager.useCase.managers.implementation.EventManager;
 import br.edu.ifba.inf008.uniManager.useCase.managers.implementation.ParticipantManager;
 import br.edu.ifba.inf008.uniManager.utils.exceptions.BadRequestException;
 import br.edu.ifba.inf008.uniManager.utils.menu.MenuUtil;
+import br.edu.ifba.inf008.uniManager.view.cli.IMenu;
 
-public class ListEventMenu{
+public class ListEventMenu implements IMenu{
     private final EventManager eventManager;
     private final ParticipantManager participantManager;
     private final Scanner scanner;
@@ -99,7 +101,13 @@ public class ListEventMenu{
                 System.out.println("Title: "+event.getValue().getTitle());
                 System.out.println("Description: "+event.getValue().getDescription());
                 System.out.println("Date: "+event.getValue().getDate());
+                System.out.println("Local: "+event.getValue().getLocal());
                 System.out.println("Capacity: "+event.getValue().getVacancy());
+                if(event.getValue().getType().equals("ShortCourse")){
+                    ShortCourse shortCourse = (ShortCourse)event.getValue();
+                    String online = shortCourse.getLink() == null ? "yes" : "no";
+                    System.out.println(String.format("Online: "+online));
+                }
                 System.out.println("-------------------------------------------");
             }
         System.out.println("                                           ");

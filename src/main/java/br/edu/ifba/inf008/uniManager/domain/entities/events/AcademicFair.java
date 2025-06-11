@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import br.edu.ifba.inf008.uniManager.domain.entities.participants.Participant;
 
 public class AcademicFair extends Event implements Serializable{
+    private static final long serialVersionUID = 1L;
     private int numberOfStands;
     private Participant organizer;
 

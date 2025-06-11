@@ -10,7 +10,7 @@ import br.edu.ifba.inf008.uniManager.useCase.managers.interfaces.IManager;
 public class CrudMenuUtil {
     public static Scanner scanner = new Scanner(System.in);
 
-    public static String readId(IManager<?> manager, String type){
+    public static String readId(IManager<?> manager, String type, String element){
         int alreadyExist;
         String id;
         do { 
@@ -19,7 +19,7 @@ public class CrudMenuUtil {
             System.out.println(MenuUtil.clearTerminal());
             
             System.out.println("===========================================");
-            System.out.println("Insert an Id (cpf for Person) for the "+type);
+            System.out.println("Insert an "+element+" for the "+type);
             System.out.println("===========================================");
             
             id = scanner.nextLine();

@@ -41,8 +41,7 @@ public class FileEventRepository implements IRepository<Event>{
 
     @Override
     public Event findById(String eventId){
-        AcademicFair e = new AcademicFair(eventId, eventId, eventId, null, eventId, 0, 0, null);
-        return e;
+        return events.get(eventId);
     }
 
     private void saveToFile() {

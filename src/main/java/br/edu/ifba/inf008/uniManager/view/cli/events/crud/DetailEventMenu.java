@@ -74,7 +74,6 @@ public class DetailEventMenu implements IMenu{
             System.out.println("Participants:                              ");
             System.out.println("===========================================");
             for (Map.Entry<String, Participant> participant : participants.entrySet()) {
-                System.out.println("-------------------------------------------");
                 System.out.println("Cpf: "+participant.getValue().getCpf());
                 System.out.println("Name: "+participant.getValue().getName());
                 System.out.println("Type: "+participant.getValue().getType());
@@ -143,6 +142,8 @@ public class DetailEventMenu implements IMenu{
                 if(participant == null) throw new BadRequestException("Incorrect cpf!");
 
                 event.subscribeParticipant(participant);
+
+                eventManager.update(id, event);
                 
                 MenuUtil.successScreen(participant.getName()+" is now participating to the "+ event.getType());
             } catch (BadRequestException e) {

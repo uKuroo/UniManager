@@ -3,6 +3,7 @@ package br.edu.ifba.inf008.uniManager.domain.entities.participants;
 import java.time.LocalDate;
 
 public class External extends Participant{
+    private static final long serialVersionUID = 1L;
     public String organization;
     public String role;
 
@@ -11,6 +12,9 @@ public class External extends Participant{
         this.organization = organization;
         this.role = role;
     }
+
+     public String getOrganization(){ return this.organization; }
+     public String getRole(){ return this.role; }
 
     @Override
     public String getType(){

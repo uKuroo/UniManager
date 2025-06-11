@@ -9,7 +9,7 @@ import br.edu.ifba.inf008.uniManager.useCase.managers.interfaces.IManager;
 
 public class EventManager implements IManager<Event>{
     private static LinkedHashMap<String, Event> events;
-    private final IRepository<Event>  repository;
+    private final IRepository<Event> repository;
 
     public EventManager(IRepository<Event> repository){
         this.repository = repository;

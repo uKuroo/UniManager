@@ -12,11 +12,8 @@ import java.util.LinkedHashMap;
 
 import br.edu.ifba.inf008.uniManager.domain.entities.events.Event;
 
-/**
- *
- * @author gabriel
- */
 public abstract class Participant implements Serializable{
+    private static final long serialVersionUID = 1L;
     protected String name;
     protected String cpf;
     protected String email;
@@ -38,6 +35,7 @@ public abstract class Participant implements Serializable{
     public String getName(){ return this.name; }
     public String getCpf(){ return this.cpf; }
     public String getEmail(){ return this.email; }
+    public String getAddress(){ return this.address; }
     public String getphone(){ return this.phone; }
     public LocalDate getBirthDate(){ return this.birthDate; }
     public ArrayList<String> getEventsIdIncluded(){ return this.eventsIdIncluded; }
@@ -47,6 +45,7 @@ public abstract class Participant implements Serializable{
     public void setName(String name){ this.name = name; }
     public void setCpf(String cpf){ this.cpf = cpf; }
     public void setEmail(String email){ this.email = email; }
+    public void setAddress(String address){ this.address = address; }
     public void setphone(String phone){ this.phone = phone; }
     public void setBirthDate(LocalDate birthDate){ this.birthDate = birthDate; }
     //#endregion

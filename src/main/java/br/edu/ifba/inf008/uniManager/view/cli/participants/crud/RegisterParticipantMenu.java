@@ -68,7 +68,7 @@ public class RegisterParticipantMenu implements IMenu{
 
     private void showStepScreen(String type){
         String name = CrudMenuUtil.readStringBasic("name", type);
-        String cpf = CrudMenuUtil.readId(participantManager, type);
+        String cpf = CrudMenuUtil.readId(participantManager, type, "cpf");
         String email = CrudMenuUtil.readStringBasic("email", type);
         String address = CrudMenuUtil.readStringBasic("address", type);
         String phone = CrudMenuUtil.readStringBasic("phone", type);
