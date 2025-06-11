@@ -9,8 +9,8 @@ import com.itextpdf.layout.element.Paragraph;
 
 public class BasicITextTest{
 
-    public void export() {
-        String dest = "files/certificates/basic_itext_test.pdf"; // Output PDF file path
+    public void export(String eventId) {
+        String dest = "files/reports/report_"+eventId+".pdf"; // Output PDF file path
 
         try {
             // Create PdfWriter
