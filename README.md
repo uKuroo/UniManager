@@ -25,20 +25,20 @@ src/
                     └── inf008/
                         └── uniManager/
                             ├── domain/
-                            │   ├── entities/
-                            │   └── ports/
+                            │   ├── entities/         # Domain Entities (Event, Participant, etc.)
+                            │   └── ports/            # Repository and service interfaces
                             ├── infra/
-                            │   ├── repository/
-                            │   └── exports/
-                            ├── useCase/
+                            │   ├── repository/       # Repository implementations (.dat)
+                            │   └── exports/          # Export implementations (PDF)
+                            ├── useCase/              # Business rules and orchestration
                             ├── utils/
                             ├── view/
-                            │   └── cli/
-                            └── App.java
+                            │   └── cli/              # UI (Command-Line Interface)
+                            └── App.java              # (main)
 
 files/
-├── binaries/    # Arquivos .dat (eventos e participantes)
-└── reports/     # Certificados exportados em PDF
+├── binaries/                                         # Persistence of serialized events and participants 
+└── reports/                                          # Reports in Pdf
 ```
 
 ## 🚀 How to Run the Project
