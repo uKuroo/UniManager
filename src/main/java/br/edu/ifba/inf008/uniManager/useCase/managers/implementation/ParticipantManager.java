@@ -1,6 +1,7 @@
 package br.edu.ifba.inf008.uniManager.useCase.managers.implementation;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 import br.edu.ifba.inf008.uniManager.domain.entities.participants.Participant;
 import br.edu.ifba.inf008.uniManager.domain.ports.repository.IRepository;
@@ -38,5 +39,20 @@ public class ParticipantManager implements IManager<Participant>{
     @Override
     public LinkedHashMap<String, Participant> getAll(){
         return participants;
+    }
+
+    @Override
+    public LinkedHashMap<String, Participant> getAllFromType(String type){
+        LinkedHashMap<String, Participant> fromType = new LinkedHashMap<>();
+
+        for (Map.Entry<String, Participant> participant : participants.entrySet()) {
+            Participant currentParticipant = participant.getValue();
+
+            if(currentParticipant.getClass().getSimpleName().equals(type)){
+                fromType.put(participant.getKey(), currentParticipant);
+            }
+        }
+
+        return fromType;
     }
 }

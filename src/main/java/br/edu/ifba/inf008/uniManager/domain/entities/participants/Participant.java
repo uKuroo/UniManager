@@ -5,6 +5,7 @@
 
 package br.edu.ifba.inf008.uniManager.domain.entities.participants;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author gabriel
  */
-public abstract class Participant {
+public abstract class Participant implements Serializable{
     protected String name;
     protected String cpf;
     protected String email;

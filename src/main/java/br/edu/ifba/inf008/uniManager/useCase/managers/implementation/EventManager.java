@@ -1,6 +1,7 @@
 package br.edu.ifba.inf008.uniManager.useCase.managers.implementation;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 import br.edu.ifba.inf008.uniManager.domain.entities.events.Event;
 import br.edu.ifba.inf008.uniManager.domain.ports.repository.IRepository;
@@ -18,6 +19,7 @@ public class EventManager implements IManager<Event>{
     @Override
     public void create(Event event){
         events.put(event.getId(), event);
+        repository.save(event);
     }
 
     @Override
@@ -38,5 +40,20 @@ public class EventManager implements IManager<Event>{
     @Override
     public LinkedHashMap<String, Event> getAll(){
         return events;
+    }
+    
+    @Override
+    public LinkedHashMap<String, Event> getAllFromType(String type){
+        LinkedHashMap<String, Event> fromType = new LinkedHashMap<>();
+
+        for (Map.Entry<String, Event> event : events.entrySet()) {
+            Event currentEvent = event.getValue();
+
+            if(currentEvent.getClass().getSimpleName().equals(type)){
+                fromType.put(event.getKey(), currentEvent);
+            }
+        }
+
+        return fromType;
     }
 }

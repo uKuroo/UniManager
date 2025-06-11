@@ -9,4 +9,5 @@ public interface IManager<T> {
     void update(String key, T obj);
     void delete(String key);
     LinkedHashMap<String, T> getAll();
+    LinkedHashMap<String, T> getAllFromType(String type);
 }

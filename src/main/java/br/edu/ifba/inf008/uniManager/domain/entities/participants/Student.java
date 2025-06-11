@@ -5,13 +5,14 @@
 
 package br.edu.ifba.inf008.uniManager.domain.entities.participants;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
  *
  * @author gabriel
  */
-public class Student extends Participant{
+public class Student extends Participant implements Serializable{
     private final String registration;
 
     public Student(String name, String cpf, String email, String address, String phone, LocalDate birthDate, String registration){

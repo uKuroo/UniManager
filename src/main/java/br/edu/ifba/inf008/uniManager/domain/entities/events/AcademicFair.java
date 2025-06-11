@@ -1,25 +1,25 @@
 package br.edu.ifba.inf008.uniManager.domain.entities.events;
 
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 import br.edu.ifba.inf008.uniManager.domain.entities.participants.Participant;
 
-public class AcademicFair extends Event{
+public class AcademicFair extends Event implements Serializable{
     private int numberOfStands;
-    private ArrayList<Participant> organizers;
+    private Participant organizer;
 
-    public AcademicFair(String title, String id, String description, LocalDate date, String local, int capacity, int numberOfStands, ArrayList<Participant> organizers){
+    public AcademicFair(String title, String id, String description, LocalDate date, String local, int capacity, int numberOfStands, Participant organizer){
         super(title, id, description, date, local, capacity);
         this.numberOfStands = numberOfStands;
-        this.organizers = organizers;
+        this.organizer = organizer;
     }
 
-    public ArrayList<Participant> getOrganizers(){ return this.organizers; }
+    public Participant getOrganizers(){ return this.organizer; }
     public int getNumberOfStands(){ return this.numberOfStands; }
 
     public void setNumberOfStands(int numberOfStands){ this.numberOfStands = numberOfStands; }
-    public void setOrganizers(ArrayList<Participant> organizers){ this.organizers = organizers; }
+    public void setOrganizer(Participant organizer){ this.organizer = organizer; }
 
     @Override
     public String getType(){

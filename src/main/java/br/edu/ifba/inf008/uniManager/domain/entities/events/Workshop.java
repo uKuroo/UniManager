@@ -1,10 +1,11 @@
 package br.edu.ifba.inf008.uniManager.domain.entities.events;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import br.edu.ifba.inf008.uniManager.domain.entities.participants.Participant;
 
-public class Workshop extends Event{
+public class Workshop extends Event implements Serializable{
     private Participant instructor;
     private boolean materialNeeded;
 

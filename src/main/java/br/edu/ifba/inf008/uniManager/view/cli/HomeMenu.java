@@ -7,6 +7,7 @@ import br.edu.ifba.inf008.uniManager.useCase.managers.implementation.Participant
 import br.edu.ifba.inf008.uniManager.utils.Exceptions.BadRequestException;
 import br.edu.ifba.inf008.uniManager.utils.MenuUtil;
 import br.edu.ifba.inf008.uniManager.view.cli.events.EventMenu;
+import br.edu.ifba.inf008.uniManager.view.cli.participants.ParticipantMenu;
 
 public class HomeMenu implements IMenu {
     private final EventManager eventManager;
@@ -24,21 +25,23 @@ public class HomeMenu implements IMenu {
 
     public void show(){
         int choice;
+        String line;
         do {
             System.out.println(MenuUtil.clearTerminal());
 
-            System.out.println("|===========================================|");
-            System.out.println("|=============== UniManager ================|");
-            System.out.println("|===========================================|");
-            System.out.println("|1. Manage Events                           |");
-            System.out.println("|2. Manage Participants                     |");
-            System.out.println("|3. Manage Certificates                     |");
-            System.out.println("|                                           |");
-            System.out.println("|0. Exit                                    |");
-            System.out.println("|===========================================|");
+            System.out.println("===========================================");
+            System.out.println("=============== UniManager ================");
+            System.out.println("===========================================");
+            System.out.println("1. Manage Events                           ");
+            System.out.println("2. Manage Participants                     ");
+            System.out.println("3. Manage Certificates                     ");
+            System.out.println("                                           ");
+            System.out.println("0. Exit                                    ");
+            System.out.println("===========================================");
         
-            choice = scanner.nextInt();
+            line = scanner.nextLine().trim();
             try {
+                choice = Integer.parseInt(line);
                 switch (choice) {
                     case 0: 
                         if(MenuUtil.exitConfirm()) return;
@@ -46,11 +49,14 @@ public class HomeMenu implements IMenu {
                     case 1: 
                         new EventMenu(eventManager, participantManager).show();
                         break;
+                    case 2:
+                        new ParticipantMenu(eventManager, participantManager).show();
+                        break;
                     default:
-                        throw new BadRequestException("Escolhe certo porra");
+                        throw new BadRequestException(choice + " isn't an option");
                 }
-            } catch (Exception e) {
-                MenuUtil.errorScreen(e.getMessage());
+            } catch (BadRequestException | NumberFormatException e) {
+                MenuUtil.errorScreen(e.getClass().getSimpleName() + " " + e.getMessage() + " ");
             }
         } while (true);
     }

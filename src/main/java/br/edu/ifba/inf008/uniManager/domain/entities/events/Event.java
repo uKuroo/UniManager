@@ -45,7 +45,7 @@ public abstract class Event implements Serializable{
     public LinkedHashMap<String, Participant> getParticipants(){ return this.participants; }
 
     public String getVacancy(){ 
-        return String.format("%d/%d", participants.size(), capacity); 
+        return String.format("%d/%d", capacity - participants.size(), capacity); 
     }
     //#endregion
 

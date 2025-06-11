@@ -1,5 +1,6 @@
 package br.edu.ifba.inf008.uniManager.domain.entities.events;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import br.edu.ifba.inf008.uniManager.domain.entities.participants.Participant;
@@ -7,7 +8,7 @@ import br.edu.ifba.inf008.uniManager.domain.entities.participants.Student;
 import br.edu.ifba.inf008.uniManager.domain.entities.participants.Teacher;
 import br.edu.ifba.inf008.uniManager.utils.Exceptions.BadRequestException;
 
-public class ShortCourse extends Event{
+public class ShortCourse extends Event implements Serializable{
     private Teacher teacher;
     private String subject;
 

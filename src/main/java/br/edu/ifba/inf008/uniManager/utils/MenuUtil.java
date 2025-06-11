@@ -25,9 +25,13 @@ public class MenuUtil {
         System.out.println("|              Type 0 to leave              |");
         System.out.println("|===========================================|");
 
-        int choice = new Scanner(System.in).nextInt();
-        if(choice == 0) return true;
-
-        return false;
+        try {
+            String line = new Scanner(System.in).nextLine().trim();
+            int choice = Integer.parseInt(line);
+            if(choice == 0) return true;
+            else return false;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
