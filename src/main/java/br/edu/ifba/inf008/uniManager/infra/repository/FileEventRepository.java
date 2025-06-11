@@ -19,6 +19,13 @@ public class FileEventRepository implements IRepository<Event>{
 
     public FileEventRepository(){
         this.events = loadFromFile();
+
+        ensureDirectories();
+    }
+
+    private void ensureDirectories() {
+        new File("files/binaries").mkdirs();
+        new File("files/reports").mkdirs();
     }
 
     @Override
