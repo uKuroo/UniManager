@@ -49,7 +49,7 @@ files/
 - Maven **3.6+**
 - Terminal with UTF-8 support and preferably ANSI (for colors in CLI, and clear lines)
 
-### ⚙️ Clonar o projeto
+### ⚙️ If using git you can clone the project
 
 - git clone https://github.com/uKuroo/uniManager.git
 - cd uniManager
