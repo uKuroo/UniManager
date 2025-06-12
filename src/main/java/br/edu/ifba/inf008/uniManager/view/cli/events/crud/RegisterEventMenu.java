@@ -74,7 +74,7 @@ public class RegisterEventMenu implements IMenu{
 
     private void showStepScreen(String type){
         String title = CrudMenuUtil.readStringBasic("Title", type);
-        String id = CrudMenuUtil.readId(eventManager, type, "id");
+        String id = CrudMenuUtil.readId(eventManager, type, "id", false);
         String description = CrudMenuUtil.readStringBasic("Description", type);
         LocalDate date = CrudMenuUtil.readDate(type);
         String local = CrudMenuUtil.readStringBasic("Local", type);
